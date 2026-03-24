@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="/">🏠 Home</a>
+    <a href="/logout">🚪 Logout</a>
+</div>
+
+<div class="admin-container">
+
+    <h1>⚙️ Admin Panel</h1>
+
+    <h2>Add New Tool</h2>
+
+    <form method="POST">
+        <input name="name" placeholder="Tool Name"><br><br>
+        <input name="desc" placeholder="Description"><br><br>
+        <input name="link" placeholder="Link"><br><br>
+        <button type="submit">Add Tool</button>
+    </form>
+
+    <hr>
+
+    <h2>All Tools</h2>
+
+    {% for tool in tools %}
+        <div class="tool-card">
+            <h3>{{ tool.name }}</h3>
+            <p>{{ tool.desc }}</p>
+            <a href="{{ tool.link }}" target="_blank">Visit</a>
+        </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

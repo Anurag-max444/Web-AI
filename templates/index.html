@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Tools Hub</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<div class="top-bar">
+    {% if session.get("admin") %}
+        <a href="/admin">⚙️ Admin</a>
+        <a href="/logout">🚪 Logout</a>
+    {% else %}
+        <a href="/login">🔐 Login</a>
+    {% endif %}
+</div>
+<div class="watermark">
+    Developed by Ayush 🚀
+</div>
+<body>
+<h1>🤖 AI Tools Hub</h1>
+
+<input type="text" id="search" placeholder="Search tools...">
+
+<div id="tools-container">
+
+    {% if tools %}
+        {% for tool in tools %}
+        <div class="tool-card">
+
+            <h2>{{ tool.name }}</h2>
+            <p>{{ tool.desc }}</p>
+            <a href="{{ tool.link }}" target="_blank">Visit</a>
+
+            <!-- ⭐ Rating Form -->
+            <form method="POST" action="/rate">
+                <input type="hidden" name="name" value="{{ tool.name }}">
+                <input name="rating" placeholder="Rating (1-5)">
+                <input name="review" placeholder="Write review">
+                <button type="submit">Submit</button>
+            </form>
+
+            <!-- ❤️ Favorite -->
+            <a href="/fav/{{ tool.name }}">❤️ Favorite</a>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No tools found 🚫</p>
+    {% endif %}
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
